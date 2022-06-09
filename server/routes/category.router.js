@@ -17,4 +17,16 @@ router.get('/', (req, res) => {
     });
 });
 
+
+
+// axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_A_KEY}}&q=&limit=25&offset=0&rating=g&lang=en`
+// )
+// .then((response)=>{
+//     res.send(response.data)
+// }).catch((err)=>{
+//     res.sendStatus(500);
+//     console.error('error in server get', err)
+// })
+// });
+
 module.exports = router;

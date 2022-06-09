@@ -1,9 +1,15 @@
 import React from 'react';
 
+import Home from './Home/Home.jsx'
+import {HashRouter as Router, Route, Navlink} from 'react-router-dom';
+
 function App(props) {
   return (
-    <div>
-      <h1>Giphy Search!</h1>
+    <div className='app'>
+    <Home/> 
+    
+    <h1>Giphy Search!</h1>
+  
     </div>
   );
 }
