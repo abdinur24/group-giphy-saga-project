@@ -6,9 +6,10 @@ function Home() {
     const [item, setitem] = useState('')
     const showgif = (event) => {
         event.preventDefault();
-        dispatch({ type: 'SET_GIF', payload: item})
+        dispatch({ type: 'SET_GIF', payload: {search: item}})
     }
     const gif = useSelector(store => store.search);
+    console.log ('this is item in home',item)
     return (
         <div>
             <h1>asda </h1>

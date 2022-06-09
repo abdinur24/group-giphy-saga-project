@@ -20,10 +20,11 @@ function* rootSaga() {
 }
 
 
-function* searchGif(){
+function* searchGif(action){
     try{
-    const response = yield axios.get('/api/gif/');
+    const response = yield axios.post(`/api/gif`, action.payload);
     yield put({type: 'SEARCH', payload: response.data.data});
+    console.log('In saga get', response.data.data);
     } catch(error){
         console.log('ERROR in GET search', error);
     }
