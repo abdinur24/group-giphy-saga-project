@@ -23,7 +23,7 @@ function* rootSaga() {
 function* searchGif(){
     try{
     const response = yield axios.get('/api/gif/');
-    yield put({type: 'SEARCH', payload: response.data.data.images });
+    yield put({type: 'SEARCH', payload: response.data.data});
     } catch(error){
         console.log('ERROR in GET search', error);
     }
@@ -45,7 +45,7 @@ function* deleteFav(){
 
 const search = (state = [], action)=>{
     if(action.type === 'SEARCH') {
-        return [...state, action.payload];
+        return action.payload;
     }
     return state; 
 }
