@@ -11,8 +11,8 @@ function Home() {
     }
     const gif = useSelector(store => store.search);
 
-    const marked = (event)=>{
-  
+    const addHandler = (event)=>{
+  dispatch({type:'ADD_FAV', payload:images.images.original.url})
 
     }
     return (
@@ -24,9 +24,9 @@ function Home() {
             </form >
             <ul>
                 {gif.map((images) =>(
-                    <div>
-                    <li><img src={images.images.original.url}/></li>
-                    <button onClick={marked(event)}>Favorite✨</button>
+                    <div className='gifs'>
+                    <img src={images.images.original.url}/>
+                    <button onClick={()=> dispatch({type:'ADD_FAV', payload:images.images.original.url})}>Favorite✨</button>
                     </div>
                 ))}
             </ul>
