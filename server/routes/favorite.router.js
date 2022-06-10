@@ -5,7 +5,15 @@ const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  const queryText = `SELECT * FROM favorites ORDER BY id ASC`;
+  const queryText = `
+    SELECT 
+      "favorites"."id", 
+      "favorites"."images",
+      "favorites"."category_id",
+      "category"."name" AS "category_name"
+     FROM favorites 
+    LEFT JOIN "category" ON "category"."id"="favorites"."category_id"
+    ORDER BY "favorites".category_id ASC`;
   pool.query(queryText)
     .then((result) => {
       res.send(result.rows);
@@ -33,18 +41,19 @@ router.post('/', (req, res) => {
 });
 
 // update given favorite with a category id
-router.put('/:favId', (req, res) => {
-  const favId = req.params.id;
+router.put('/:favId/:catId', (req, res) => {
+  const favId = req.params.favId;
+  const catId = req.params.catId;
   console.log(`Updating fav with an id of ${favId}`);
-  const queryText = `UPDATE favorites SET "category_id" WHERE id=$1;`
-  pool.query(queryText, [favId])
-  .then(response => {
-    res.sendStatus(201)
-    console.log('UPDATING FAV', favId);
-  }).catch(err => {
-    res.sendStatus(500);
-    console.log('ERROR IN POST', err)
-  });
+  const queryText = `UPDATE favorites SET "category_id"=$1 WHERE id=$2;`
+  pool.query(queryText, [catId, favId])
+    .then(response => {
+      res.sendStatus(201)
+      console.log('UPDATING FAV', favId);
+    }).catch(err => {
+      res.sendStatus(500);
+      console.log('ERROR IN POST', err)
+    });
   // req.body should contain a category_id to add to this favorite image
 });
 
@@ -54,13 +63,13 @@ router.delete('/', (req, res) => {
   console.log(`DELETING fav with an ID of ${favId}`);
   const queryText = `DELETE FROM favorites WHERE id=$1;`
   pool.query(queryText, [favId])
-  .then(response => {
-    res.sendStatus(201)
-    console.log('DELETING FAV', favId);
-  }).catch(err => {
-    res.sendStatus(500);
-    console.log('ERROR IN POST', err)
-  });
+    .then(response => {
+      res.sendStatus(201)
+      console.log('DELETING FAV', favId);
+    }).catch(err => {
+      res.sendStatus(500);
+      console.log('ERROR IN POST', err)
+    });
 });
 
 module.exports = router;

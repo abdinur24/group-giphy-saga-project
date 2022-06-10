@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import FavoriteItem from './FavoriteItem';
 
 function Favorites() {
     let favorite = useSelector(store => store.favorite);
@@ -17,12 +17,7 @@ function Favorites() {
         <div>
             <h2>Favorites</h2>
             <div className="gif-container">
-                {favorite.map((fav) =>
-                    <div className='gifs'>
-                        <img src={fav.images} />
-                        <select name='category'></select>
-                    </div>
-                )}
+                {favorite.map((fav) => <FavoriteItem favorite={fav} />)}
             </div>
         </div>
     )
