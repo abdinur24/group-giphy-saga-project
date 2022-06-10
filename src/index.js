@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
+
 // Saga Generator
 const sagaMiddleware = createSagaMiddleware();
 
@@ -34,9 +35,10 @@ function* searchGif(action){
 }
 
 function* getFav(){
+   
     try{
         const response = yield axios.get('/api/favorite');
-        yield put({type: 'Fav', payload: response.data});
+        yield put({type: 'FAV', payload: response.data});
         console.log('In saga GET FAV', response.data);
     } catch(error){
         console.log('ERROR in GET favs', error);
@@ -74,7 +76,7 @@ const search = (state = [], action)=>{
 
 const favorite = (state = [], action)=>{
     if(action.type === 'FAV') {
-        return [...state, action.payload];
+        return action.payload;
     }
     return state; 
 }
