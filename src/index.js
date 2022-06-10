@@ -56,6 +56,15 @@ function* addFav(action){
 
 }
 
+function* putCat(){
+    try{
+        yield axios.delete(`/api/favorite/${action.payload}`);
+        yield put({type:'SET_FAV'});
+    }catch(error){
+        console.log('Error in PUT FAV', error);
+    }
+}
+
 function* deleteFav(action){
     try{
         yield axios.delete(`/api/favorite/${action.payload}`);
