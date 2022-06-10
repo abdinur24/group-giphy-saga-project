@@ -26,7 +26,7 @@ function* searchGif(action){
     try{
     const response = yield axios.post(`/api/gif`, action.payload);
     yield put({type: 'SEARCH', payload: response.data.data});
-    console.log('In saga get', response.data.data);
+    console.log('In saga get GIF', response.data.data);
     } catch(error){
         console.log('ERROR in GET search', error);
     }
@@ -37,7 +37,7 @@ function* getFav(){
     try{
         const response = yield axios.get('/api/favorite');
         yield put({type: 'Fav', payload: response.data});
-        console.log('In saga GET', response.data);
+        console.log('In saga GET FAV', response.data);
     } catch(error){
         console.log('ERROR in GET favs', error);
     }
