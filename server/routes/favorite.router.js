@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 // add a new favorite
 router.post('/', (req, res) => {
   const newFav = req.body;
-  const queryText = `INSERT INTO favorites ("id") VALUES ($1);`
-  pool.query(queryText, [newFav.id])
+  const queryText = `INSERT INTO favorites ("images") VALUES ($1);`
+  pool.query(queryText, [newFav])
     .then(response => {
       res.sendStatus(201)
       console.log('ADDING NEW FAV', newFav);
