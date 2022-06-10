@@ -4,12 +4,17 @@ import { useState, useEffect } from 'react';
 function Home() {
     const dispatch = useDispatch();
     const [item, setitem] = useState('')
+    const [favorite, setfavorite]= useState(false)
     const showgif = (event) => {
         event.preventDefault();
         dispatch({ type: 'SET_GIF', payload: {search: item}})
     }
     const gif = useSelector(store => store.search);
-    console.log ('this is item in home',item)
+
+    const marked = (event)=>{
+  
+
+    }
     return (
         <div>
             <h1>asda </h1>
@@ -20,8 +25,8 @@ function Home() {
             <ul>
                 {gif.map((images) =>(
                     <div>
-                    <li>hi</li>
                     <li><img src={images.images.original.url}/></li>
+                    <button onClick={marked(event)}>Favorite✨</button>
                     </div>
                 ))}
             </ul>
