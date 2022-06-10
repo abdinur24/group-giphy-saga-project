@@ -19,6 +19,7 @@ function Favorites() {
             {favorite.map((fav) =>
                 <div>
                     <img src={fav.images}/>
+                    <select name='category'></select>
                 </div>
             )}
         </div>
