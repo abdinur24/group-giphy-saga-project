@@ -26,7 +26,7 @@ function Home() {
                 {gif.map((images) =>(
                     <div className='gifs'>
                     <img src={images.images.original.url}/>
-                    <button onClick={()=> dispatch({type:'ADD_FAV', payload:images.images.url})}>Favorite✨</button>
+                    <button onClick={()=> dispatch({type:'ADD_FAV', payload:images.images.original.url})}>Favorite✨</button>
                     </div>
                 ))}
             </ul>
