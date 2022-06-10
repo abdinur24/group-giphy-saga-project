@@ -12,10 +12,12 @@ import axios from 'axios';
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
-    yield takeEvery('SET_GIF', searchGif)
-    yield takeEvery
-    yield takeEvery
-    yield takeEvery
+    // SEARCH Saga
+    yield takeEvery('SET_GIF', searchGif);
+    //FAV Saga
+    yield takeEvery('SET_FAV', getFav);
+    yield takeEvery('ADD_FAV', addFav);
+    yield takeEvery('DELETE_FAV', deleteFav);
 
 }
 
@@ -32,14 +34,33 @@ function* searchGif(action){
 }
 
 function* getFav(){
+    try{
+        const response = yield axios.get('/api/favorite');
+        yield put({type: 'Fav', payload: response.data});
+        console.log('In saga GET', response.data);
+    } catch(error){
+        console.log('ERROR in GET favs', error);
+    }
 
 }
 
-function* addFav(){
+function* addFav(action){
+    try{
+        yield axios.post('/api/favorite', action.payload);
+        yield put({type:'SET_FAV'});
+    } catch(error){
+        console.log('ERROR in ADD fav', error);
+    }
 
 }
 
-function* deleteFav(){
+function* deleteFav(action){
+    try{
+        yield axios.delete(`/api/favorite/${action.payload}`);
+        yield put({type:'SET_FAV'});
+    } catch(error){
+        console.log('Error in DELETE fav', error);
+    }
 
 }
 
@@ -53,7 +74,7 @@ const search = (state = [], action)=>{
 
 const favorite = (state = [], action)=>{
     if(action.type === 'FAV') {
-        return action.payload;
+        return [...state, action.payload];
     }
     return state; 
 }
