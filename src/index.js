@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
     yield takeEvery('SET_GIF', searchGif)
-    yield takeEvery
+    yield takeEvery 
     yield takeEvery
     yield takeEvery
 
@@ -32,7 +32,7 @@ function* searchGif(action){
 }
 
 function* getFav(){
-
+   
 }
 
 function* addFav(){
