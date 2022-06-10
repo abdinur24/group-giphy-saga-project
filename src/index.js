@@ -48,7 +48,7 @@ function* getFav(){
 
 function* addFav(action){
     try{
-        yield axios.post('/api/favorite', action.payload);
+        yield axios.post('/api/favorite', {url: action.payload});
         yield put({type:'SET_FAV'});
     } catch(error){
         console.log('ERROR in ADD fav', error);

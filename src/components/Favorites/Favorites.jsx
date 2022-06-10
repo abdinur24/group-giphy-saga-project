@@ -13,15 +13,12 @@ function Favorites() {
     },[])
     
 
-
-
     return (
         <div>
             <h2>Favorites</h2>
             {favorite.map((fav) =>
                 <div>
-                    <h1>Laugh</h1>
-                    <h1>{fav.images} </h1>
+                    <img src={fav.images}/>
                 </div>
             )}
         </div>
