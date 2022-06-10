@@ -6,24 +6,24 @@ import axios from 'axios';
 
 function Favorites() {
     let favorite = useSelector(store => store.favorite);
-    let [favoriteList, setFavoriteList] = useState([]);
+    console.log('IN fav', favorite)
     let dispatch = useDispatch();
-    const getFavorites = () => {
-        axios.get('/api/gif')
-            .then((response) => {
-                dispatch({
-                    type: 'SET_FAV',
-                    payload: response.data
-                })
-            })
-    }
+    useEffect(() => {
+        dispatch({type:'SET_FAV',})
+    },[])
+    
+
+
 
     return (
         <div>
             <h2>Favorites</h2>
-            <li key={favorite.id}>{favorite.id} 
-            <p><img>{favorite.id}</img></p>
-            </li>
+            {favorite.map((fav) =>
+                <div>
+                    <h1>Laugh</h1>
+                    <h1>{fav.images} </h1>
+                </div>
+            )}
         </div>
     )
 }
