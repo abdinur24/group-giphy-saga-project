@@ -18,6 +18,7 @@ function* rootSaga() {
     //FAV Saga
     yield takeEvery('SET_FAV', getFav);
     yield takeEvery('ADD_FAV', addFav);
+    yield takeEvery('ADD_CAT', putCat);
     yield takeEvery('DELETE_FAV', deleteFav);
 
 }
@@ -56,7 +57,7 @@ function* addFav(action){
 
 }
 
-function* putCat(){
+function* putCat(action){
     try{
         yield axios.delete(`/api/favorite/${action.payload}`);
         yield put({type:'SET_FAV'});
@@ -65,9 +66,9 @@ function* putCat(){
     }
 }
 
-function* deleteFav(action){
+function* deleteFav(){
     try{
-        yield axios.delete(`/api/favorite/${action.payload}`);
+        yield axios.delete(`/api/favorite/`);
         yield put({type:'SET_FAV'});
     } catch(error){
         console.log('Error in DELETE fav', error);

@@ -9,19 +9,21 @@ function Favorites() {
     console.log('IN fav', favorite)
     let dispatch = useDispatch();
     useEffect(() => {
-        dispatch({type:'SET_FAV',})
-    },[])
-    
+        dispatch({ type: 'SET_FAV', })
+    }, [])
+
 
     return (
         <div>
             <h2>Favorites</h2>
-            {favorite.map((fav) =>
-                <div>
-                    <img src={fav.images}/>
-                    <select name='category'></select>
-                </div>
-            )}
+            <div className="gif-container">
+                {favorite.map((fav) =>
+                    <div className='gifs'>
+                        <img src={fav.images} />
+                        <select name='category'></select>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
